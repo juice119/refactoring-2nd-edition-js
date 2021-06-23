@@ -4,9 +4,9 @@ import plays from './input/plays.json';
 import invoice from './input/invoice.json';
 import beStatement from './output/be-statement';
 
-test('1챕터 - ref_statement', () => {
+test('1챕터(리팩토링) - ref_statement', () => {
   expect(ref_statement(invoice, plays)).toBe(beStatement);
 });
-test('1챕터 - src_statement', () => {
+test('1챕터(원본) - src_statement', () => {
   expect(src_statement(invoice, plays)).toBe(beStatement);
 });
