@@ -33,6 +33,14 @@ export default function statement(invoice, plays) {
       result += Math.floor(aPerformance.audience / 5);
     return result;
   }
+  function totalVolumeCredits() {
+    let result = 0;
+    for (let perf of invoice.performances) {
+      // 포인트를 적립한다.
+      result += volumeCreditsFor(perf);
+    }
+    return result;
+  }
   function usd(aNumber) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -50,14 +58,9 @@ export default function statement(invoice, plays) {
     result += `${playFor(perf).name} : ${usd(amountFor(perf))} (${perf.audience}석)\n`;
     totalAmount += amountFor(perf);
   }
-  let volumeCredits = 0;
-  for (let perf of invoice.performances) {
-    // 포인트를 적립한다.
-    volumeCredits += volumeCreditsFor(perf);
-  }
-
+  
   result += `총액: ${usd(totalAmount)}\n`;
-  result += `적립 포인트: ${volumeCredits}점\n`;
+  result += `적립 포인트: ${totalVolumeCredits()}점\n`;
   return result;
 }
 
